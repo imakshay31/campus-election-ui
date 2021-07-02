@@ -1,32 +1,33 @@
 module.exports = {
   presets: [
     [
-      "next/babel",
+      'next/babel',
       {
-        "preset-env": {},
-        "transform-runtime": {},
-        "styled-jsx": {},
-        "class-properties": {},
+        'preset-env': {},
+        'transform-runtime': {},
+        'styled-jsx': {},
+        'class-properties': {},
       },
     ],
   ],
   plugins: [
     [
-      "transform-imports",
+      'transform-imports',
       {
-        "@material-ui/core": {
-          transform: "@material-ui/core/${member}",
+        '@material-ui/core': {
+          transform: '@material-ui/core/${member}',
           preventFullImport: true,
         },
-        "@material-ui/styles": {
-          transform: "@material-ui/styles/${member}",
+        '@material-ui/styles': {
+          transform: '@material-ui/styles/${member}',
           preventFullImport: true,
         },
-        "@material-ui/icons": {
-          transform: "@material-ui/icons/${member}",
+        '@material-ui/icons': {
+          transform: '@material-ui/icons/${member}',
           preventFullImport: true,
         },
       },
     ],
+    ['relay'],
   ],
 };
