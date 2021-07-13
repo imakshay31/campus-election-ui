@@ -1,0 +1,91 @@
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type Candidate {
+  _id: String
+  id: String
+  email: String!
+  name: String!
+  phone: String!
+  description: String
+  voteEarned: Int!
+  uniqueIndex: Int!
+  positionApplied: String!
+}
+
+input Candidate_Position {
+  candidateId: String!
+  positionId: String!
+}
+
+input CandidateInput {
+  name: String!
+  phone: String!
+  description: String
+  positionApplied: String!
+}
+
+type Mutation {
+  createPosition(positionInfo: PositionInput!): Position!
+  createCandidate(candidateInfo: CandidateInput!): Candidate!
+  submitVote(submitVoteInput: SubmitVoteInput!): User!
+  generateResult(posittionId: PositionIdInput!): Candidate!
+}
+
+type Position {
+  _id: String
+  id: String
+  name: String!
+  description: String!
+  countofCandidate: Int!
+  totalVotes: Int!
+  maxVotes: Int!
+  slotIndex: Int!
+  winner: String!
+  candidateRegister: String!
+}
+
+input PositionIdInput {
+  positionId: String!
+}
+
+input PositionInput {
+  name: String!
+  description: String!
+  slotIndex: Float!
+}
+
+type Query {
+  getViewer: User!
+  getAllPosition: [Position!]!
+  getCandidateForPosition(positionid: PositionIdInput!): [Candidate!]!
+  getWinner(positionid: PositionIdInput!): Candidate!
+}
+
+input SubmitVoteInput {
+  responses: [Candidate_Position!]!
+}
+
+type User {
+  _id: String
+  id: String
+  email: String!
+  password: String!
+  isCandidate: Boolean!
+  countVotedPosition: Int!
+  positionVoted: String
+  response: UserResponse
+}
+
+type UserResponse {
+  responses: [UserResponseItem!]!
+}
+
+type UserResponseItem {
+  candidateId: String!
+  positionId: String!
+}
+
